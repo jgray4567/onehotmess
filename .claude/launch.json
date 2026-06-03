@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ohm-site",
+      "runtimeExecutable": "/usr/bin/python3",
+      "runtimeArgs": ["-m", "http.server", "3737", "--directory", "/Users/jongrayson/Client Work/OHM/OHM 2026 Version2"],
+      "port": 3737
+    }
+  ]
+}
