@@ -202,84 +202,53 @@ dom.mobileLinks.forEach(link => {
 });
 
 /* =============================================
-   VIDEO GALLERY — Featured + Strip + Lightbox
+   VIDEO GALLERY — EPK-style featured + grid + lightbox
    ============================================= */
-const lightbox = document.getElementById('lightbox');
-const lightboxIframe = document.getElementById('lightbox-iframe');
-const lightboxCounter = document.getElementById('lightbox-counter');
-const lightboxClose = document.getElementById('lightbox-close');
-const lightboxPrev = document.getElementById('lightbox-prev');
-const lightboxNext = document.getElementById('lightbox-next');
-const vidFeatured = document.querySelector('.vid-featured');
-const vidCards = document.querySelectorAll('.vid-card');
-const videoIds = Array.from(vidCards).map(c => c.dataset.video);
-let currentVideo = 0;
+(function() {
+    const featured    = document.getElementById('main-vid-featured');
+    const featuredThumb = document.getElementById('main-vid-featured-thumb');
+    const thumbs      = document.querySelectorAll('#main-vid-grid .epk-vid-thumb');
+    const lightbox    = document.getElementById('main-lightbox');
+    const lbIframe    = document.getElementById('main-lb-iframe');
+    const lbClose     = document.getElementById('main-lb-close');
+    if (!featured || !lightbox) return;
 
-// Update featured hero when a strip card is clicked
-const setFeatured = (index) => {
-    if (!vidFeatured) return;
-    currentVideo = index;
-    const vid = videoIds[index];
-    vidFeatured.dataset.video = vid;
-    vidFeatured.dataset.index = index;
-    vidFeatured.querySelector('img').src = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+    let currentVideo  = featured.dataset.video;
 
-    vidCards.forEach((c, i) => c.classList.toggle('active', i === index));
-};
-
-// Open lightbox
-const openLightbox = (index) => {
-    currentVideo = index;
-    lightboxIframe.src = `https://www.youtube-nocookie.com/embed/${videoIds[currentVideo]}?rel=0&modestbranding=1`;
-    lightboxCounter.textContent = `${currentVideo + 1} / ${videoIds.length}`;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-};
-
-const closeLightbox = () => {
-    lightbox.classList.remove('open');
-    lightboxIframe.src = 'about:blank';
-    document.body.style.overflow = '';
-};
-
-const showVideo = (index) => {
-    currentVideo = ((index % videoIds.length) + videoIds.length) % videoIds.length;
-    lightboxIframe.src = `https://www.youtube-nocookie.com/embed/${videoIds[currentVideo]}?rel=0&modestbranding=1`;
-    lightboxCounter.textContent = `${currentVideo + 1} / ${videoIds.length}`;
-};
-
-// Featured click → open lightbox
-if (vidFeatured) {
-    vidFeatured.addEventListener('click', () => {
-        openLightbox(parseInt(vidFeatured.dataset.index) || 0);
+    // Thumbnail click → update featured
+    thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            currentVideo = thumb.dataset.video;
+            featuredThumb.src = `https://img.youtube.com/vi/${currentVideo}/hqdefault.jpg`;
+            featured.dataset.video = currentVideo;
+            thumbs.forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        });
+        thumb.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); thumb.click(); }
+        });
     });
-}
 
-// Strip card click → update featured + open lightbox
-vidCards.forEach((card, i) => {
-    card.addEventListener('click', () => {
-        setFeatured(i);
-        openLightbox(i);
+    // Featured click → open lightbox
+    const openLB = () => {
+        lbIframe.src = `https://www.youtube.com/embed/${currentVideo}?autoplay=1&rel=0`;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    const closeLB = () => {
+        lightbox.classList.remove('active');
+        lbIframe.src = 'about:blank';
+        document.body.style.overflow = '';
+    };
+
+    featured.addEventListener('click', openLB);
+    featured.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(); }});
+    lbClose.addEventListener('click', closeLB);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLB();
     });
-});
-
-if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-if (lightboxPrev) lightboxPrev.addEventListener('click', () => showVideo(currentVideo - 1));
-if (lightboxNext) lightboxNext.addEventListener('click', () => showVideo(currentVideo + 1));
-
-if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-}
-
-// Keyboard controls
-document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showVideo(currentVideo - 1);
-    if (e.key === 'ArrowRight') showVideo(currentVideo + 1);
-});
+})();
 
 // Swipe support for lightbox
 let swipeStartX = 0;

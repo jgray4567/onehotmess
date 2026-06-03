@@ -273,60 +273,68 @@
                 <h2 class="section-title">VIDEOS</h2>
             </div>
 
-            <!-- Featured hero video -->
-            <div class="vid-featured" data-video="z7w3RSIjYN0" data-index="0">
-                <img src="https://img.youtube.com/vi/z7w3RSIjYN0/hqdefault.jpg" alt="One Hot Mess" loading="lazy">
-                <div class="vid-featured-overlay">
-                    <div class="vid-play-ring">
-                        <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="white" stroke-width="2" opacity="0.6"/><polygon points="26,20 26,44 46,32" fill="white"/></svg>
+            <!-- Featured video -->
+            <div class="epk-video-featured" id="main-vid-featured" data-video="z7w3RSIjYN0" role="button" tabindex="0" aria-label="Watch One Hot Mess video">
+                <img src="https://img.youtube.com/vi/z7w3RSIjYN0/hqdefault.jpg" alt="One Hot Mess" id="main-vid-featured-thumb" loading="lazy">
+                <div class="epk-video-featured-overlay">
+                    <div class="epk-play-btn" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
                     </div>
-                    <span class="vid-featured-label">WATCH NOW</span>
+                    <span style="font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.2em;color:rgba(255,255,255,0.9);text-transform:uppercase;">Watch Now</span>
                 </div>
-                <div class="vid-featured-glow"></div>
             </div>
 
-            <!-- Thumbnail strip -->
-            <div class="vid-strip-wrap">
-                <div class="vid-strip" id="vid-strip">
-                    <div class="vid-card active" data-video="z7w3RSIjYN0" data-index="0">
-                        <img src="https://img.youtube.com/vi/z7w3RSIjYN0/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
-                        <div class="vid-card-overlay">
-                            <div class="vid-card-play"><svg viewBox="0 0 40 40" fill="none"><polygon points="16,12 16,28 28,20" fill="white"/></svg></div>
-                        </div>
-                        <div class="vid-card-bar"></div>
-                    </div>
-                    <div class="vid-card" data-video="MkaX3Vx2LHg" data-index="1">
-                        <img src="https://img.youtube.com/vi/MkaX3Vx2LHg/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
-                        <div class="vid-card-overlay">
-                            <div class="vid-card-play"><svg viewBox="0 0 40 40" fill="none"><polygon points="16,12 16,28 28,20" fill="white"/></svg></div>
-                        </div>
-                        <div class="vid-card-bar"></div>
-                    </div>
-                    <div class="vid-card" data-video="r_wuEILTV3M" data-index="2">
-                        <img src="https://img.youtube.com/vi/r_wuEILTV3M/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
-                        <div class="vid-card-overlay">
-                            <div class="vid-card-play"><svg viewBox="0 0 40 40" fill="none"><polygon points="16,12 16,28 28,20" fill="white"/></svg></div>
-                        </div>
-                        <div class="vid-card-bar"></div>
-                    </div>
-                    <div class="vid-card" data-video="WOXf2M0SlSY" data-index="3">
-                        <img src="https://img.youtube.com/vi/WOXf2M0SlSY/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
-                        <div class="vid-card-overlay">
-                            <div class="vid-card-play"><svg viewBox="0 0 40 40" fill="none"><polygon points="16,12 16,28 28,20" fill="white"/></svg></div>
-                        </div>
-                        <div class="vid-card-bar"></div>
-                    </div>
+            <!-- Thumbnail grid -->
+            <div class="epk-video-grid" id="main-vid-grid" role="list" aria-label="Video thumbnails">
+                <div class="epk-vid-thumb active" data-video="z7w3RSIjYN0" role="listitem" tabindex="0" aria-label="Video 1">
+                    <img src="https://img.youtube.com/vi/z7w3RSIjYN0/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="MkaX3Vx2LHg" role="listitem" tabindex="0" aria-label="Video 2">
+                    <img src="https://img.youtube.com/vi/MkaX3Vx2LHg/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="r_wuEILTV3M" role="listitem" tabindex="0" aria-label="Video 3">
+                    <img src="https://img.youtube.com/vi/r_wuEILTV3M/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="WOXf2M0SlSY" role="listitem" tabindex="0" aria-label="Video 4">
+                    <img src="https://img.youtube.com/vi/WOXf2M0SlSY/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="sii5wwoiU3A" role="listitem" tabindex="0" aria-label="Video 5">
+                    <img src="https://img.youtube.com/vi/sii5wwoiU3A/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="gNgLSM8pRj0" role="listitem" tabindex="0" aria-label="Video 6">
+                    <img src="https://img.youtube.com/vi/gNgLSM8pRj0/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="7DgJ0BwqM6c" role="listitem" tabindex="0" aria-label="Video 7">
+                    <img src="https://img.youtube.com/vi/7DgJ0BwqM6c/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="apmv7S8dgWI" role="listitem" tabindex="0" aria-label="Video 8">
+                    <img src="https://img.youtube.com/vi/apmv7S8dgWI/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+                <div class="epk-vid-thumb" data-video="dRgf963YpyU" role="listitem" tabindex="0" aria-label="Video 9">
+                    <img src="https://img.youtube.com/vi/dRgf963YpyU/mqdefault.jpg" alt="One Hot Mess" loading="lazy">
+                    <div class="epk-vid-thumb-overlay" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                </div>
+            </div>
         </section>
 
         <!-- VIDEO LIGHTBOX -->
-        <div class="lightbox" id="lightbox">
-            <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-            <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous">&#8249;</button>
-            <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next">&#8250;</button>
-            <div class="lightbox-video">
-                <iframe id="lightbox-iframe" src="about:blank" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="epk-lightbox" id="main-lightbox" role="dialog" aria-modal="true" aria-label="Video player">
+            <div class="epk-lightbox-inner">
+                <button class="epk-lightbox-close" id="main-lb-close" aria-label="Close">&times;</button>
+                <iframe id="main-lb-iframe" src="about:blank" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                    title="One Hot Mess video">
+                </iframe>
             </div>
-            <div class="lightbox-counter" id="lightbox-counter"></div>
         </div>
 
         <!-- GALLERY LIGHTBOX -->
