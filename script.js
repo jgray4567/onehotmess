@@ -215,7 +215,7 @@ dom.mobileLinks.forEach(link => {
 
     let currentVideo  = featured.dataset.video;
 
-    // Thumbnail click → update featured
+    // Thumbnail click → update featured + open lightbox
     thumbs.forEach(thumb => {
         thumb.addEventListener('click', () => {
             currentVideo = thumb.dataset.video;
@@ -223,6 +223,7 @@ dom.mobileLinks.forEach(link => {
             featured.dataset.video = currentVideo;
             thumbs.forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
+            openLB();
         });
         thumb.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); thumb.click(); }
