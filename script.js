@@ -250,25 +250,6 @@ dom.mobileLinks.forEach(link => {
     });
 })();
 
-// Swipe support for lightbox
-let swipeStartX = 0;
-let swipeStartY = 0;
-
-if (lightbox) {
-    lightbox.addEventListener('touchstart', (e) => {
-        swipeStartX = e.touches[0].clientX;
-        swipeStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - swipeStartX;
-        const dy = e.changedTouches[0].clientY - swipeStartY;
-        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-            if (dx < 0) showVideo(currentVideo + 1);
-            else showVideo(currentVideo - 1);
-        }
-    }, { passive: true });
-}
 
 /* =============================================
    GALLERY WALL — Smooth gliding auto-scroll + touch with momentum
