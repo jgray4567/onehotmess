@@ -361,6 +361,10 @@ a {
     opacity: 0.8;
 }
 
+.nav-epk-btn {
+    display: none;
+}
+
 /* Mobile social link in hamburger menu */
 .mobile-social {
     margin-top: 16px;

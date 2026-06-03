@@ -1360,9 +1360,118 @@ a.epk-btn-primary:hover {
     }
 }
 
+/* ---- Hamburger ---- */
+.epk-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    -webkit-tap-highlight-color: transparent;
+    z-index: 600;
+}
+
+.epk-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--epk-text);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.epk-hamburger.active .epk-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.epk-hamburger.active .epk-bar:nth-child(2) { opacity: 0; }
+.epk-hamburger.active .epk-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- Mobile Menu Overlay ---- */
+.epk-mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8,4,1,0.97);
+    z-index: 550;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.epk-mobile-menu.active {
+    display: flex;
+}
+
+.epk-mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.epk-mobile-link {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(240,235,228,0.75);
+    padding: 14px 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.epk-mobile-link:hover,
+.epk-mobile-link:active { color: var(--epk-text); text-decoration: none; }
+
+.epk-mobile-cta {
+    color: var(--epk-accent) !important;
+    margin-top: 16px;
+    border: 1.5px solid var(--epk-accent);
+    border-radius: 4px;
+    padding: 14px 32px;
+    width: auto;
+}
+
+.epk-mobile-back {
+    font-size: 0.85rem;
+    color: var(--epk-muted) !important;
+    margin-top: 20px;
+    border-bottom: none;
+    letter-spacing: 0.15em;
+}
+
 @media (max-width: 640px) {
     .epk-nav-links {
         display: none;
+    }
+
+    .epk-hamburger {
+        display: flex;
+    }
+
+    .epk-hero-btns,
+    .epk-cta-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 0 24px;
+    }
+
+    .epk-hero-btns .epk-btn,
+    .epk-cta-btns .epk-btn {
+        width: 100%;
+        max-width: 320px;
     }
 
     .epk-section {

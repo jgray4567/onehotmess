@@ -60,8 +60,24 @@
             <a href="#songs">SONGS</a>
             <a href="#booking" class="epk-nav-cta">BOOK OHM</a>
         </div>
+        <button class="epk-hamburger" id="epk-hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span class="epk-bar"></span>
+            <span class="epk-bar"></span>
+            <span class="epk-bar"></span>
+        </button>
     </div>
 </nav>
+
+<!-- EPK Mobile Menu -->
+<div class="epk-mobile-menu" id="epk-mobile-menu">
+    <div class="epk-mobile-menu-links">
+        <a href="#overview" class="epk-mobile-link">BIO</a>
+        <a href="#videos" class="epk-mobile-link">VIDEOS</a>
+        <a href="#songs" class="epk-mobile-link">SONGS</a>
+        <a href="#booking" class="epk-mobile-link epk-mobile-cta">BOOK OHM</a>
+        <a href="index.html" class="epk-mobile-link epk-mobile-back">← MAIN SITE</a>
+    </div>
+</div>
 
 <!-- ========== HERO ========== -->
 <header class="epk-hero" id="hero">
@@ -650,6 +666,39 @@
     });
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+    });
+})();
+
+// ---- EPK HAMBURGER ----
+(function() {
+    var btn   = document.getElementById('epk-hamburger');
+    var menu  = document.getElementById('epk-mobile-menu');
+    var links = menu.querySelectorAll('.epk-mobile-link');
+
+    function openMenu() {
+        btn.classList.add('active');
+        menu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+        btn.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+        btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function() {
+        menu.classList.contains('active') ? closeMenu() : openMenu();
+    });
+
+    links.forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
     });
 })();
 
