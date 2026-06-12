@@ -934,6 +934,41 @@ a {
     font-weight: 500;
 }
 
+.show-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.show-calendar {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    padding: 9px 16px;
+    border: 1px solid var(--accent, #00e5ff);
+    background: transparent;
+    color: var(--accent, #00e5ff);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.show-calendar:hover {
+    background: var(--accent, #00e5ff);
+    color: var(--bg-color, #0a0a0a);
+}
+
+.show-calendar svg {
+    flex-shrink: 0;
+}
+
 .show-tickets {
     font-family: var(--font-heading);
     font-size: 0.75rem;
@@ -1318,9 +1353,16 @@ a {
         padding: 20px 0;
     }
 
-    .show-tickets {
+    .show-actions {
         width: 100%;
-        padding: 12px 20px;
+        justify-content: stretch;
+    }
+
+    .show-calendar,
+    .show-tickets {
+        flex: 1;
+        text-align: center;
+        padding: 12px 16px;
     }
 
     /* Mobile menu — larger touch targets */

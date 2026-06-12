@@ -1,6 +1,14 @@
 /* =============================================
    DYNAMIC EVENTS FETCHER
    ============================================= */
+// Event store for calendar button lookups
+const _eventStore = new Map();
+
+function addToCalendarById(isoDate) {
+    const evt = _eventStore.get(isoDate);
+    if (evt) addToCalendar(evt);
+}
+
 function loadEvents() {
     const eventsContainer = document.getElementById('events-fallback');
     if (!eventsContainer) return;
@@ -45,6 +53,71 @@ function loadEvents() {
         });
 }
 
+/* =============================================
+   ADD TO CALENDAR — .ics GENERATOR
+   ============================================= */
+function escapeICS(text) {
+    if (!text) return '';
+    return text.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+}
+
+function generateICS(event) {
+    const dt = event.parsedDate;
+    if (isNaN(dt.getTime())) return null;
+
+    // Assume 2-hour duration for live music
+    const endDT = new Date(dt.getTime() + 2 * 60 * 60 * 1000);
+
+    const pad = (n) => n.toString().padStart(2, '0');
+    const fmtDate = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+
+    const startStr = fmtDate(dt);
+    const endStr = fmtDate(endDT);
+    const uid = `ohm-${startStr}@onehotmess.band`;
+    const title = event.title || 'One Hot Mess Live';
+    const venue = event.venue || '';
+    const location = event.location || '';
+    const fullLocation = [venue, location].filter(Boolean).join(', ');
+    const url = event.url || '';
+    const description = [venue, `Details: ${url}`].filter(Boolean).join('\\n');
+
+    const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//One Hot Mess//onehotmess.band//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${fmtDate(new Date())}`,
+        `DTSTART:${startStr}`,
+        `DTEND:${endStr}`,
+        `SUMMARY:${escapeICS(title)}`,
+        `LOCATION:${escapeICS(fullLocation)}`,
+        `DESCRIPTION:${escapeICS(description)}`,
+        `URL;VALUE=URI:${url}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ];
+
+    return lines.join('\r\n');
+}
+
+function addToCalendar(event) {
+    const icsContent = generateICS(event);
+    if (!icsContent) return;
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ohm-${(event.venue || 'show').replace(/[^a-z0-9]/gi, '-').toLowerCase()}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 function renderEventCard(event) {
     const item = document.createElement('div');
     item.className = 'show-card reveal visible';
@@ -70,6 +143,9 @@ function renderEventCard(event) {
     
     const timeLine = timeStr ? `<p class="show-time">${timeStr}${extraTitleInfo}</p>` : `<p class="show-time">${extraTitleInfo.replace(' — ', '')}</p>`;
 
+    const hasValidDate = !isNaN(event.parsedDate.getTime());
+    if (hasValidDate) _eventStore.set(event.parsedDate.toISOString(), event);
+
     item.innerHTML = `
         <div class="show-date">
             <span class="show-month">${monthStr}</span>
@@ -80,7 +156,10 @@ function renderEventCard(event) {
             <p class="show-location">${event.location || ''}</p>
             ${timeLine}
         </div>
-        <a href="${event.url}" target="_blank" rel="noopener noreferrer" class="show-tickets">DETAILS</a>
+        <div class="show-actions">
+            ${hasValidDate ? '<button class="show-calendar" onclick="addToCalendarById(\'' + event.parsedDate.toISOString() + '\')" title="Add to Calendar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Add to Calendar</button>' : ''}
+            <a href="${event.url}" target="_blank" rel="noopener noreferrer" class="show-tickets">DETAILS</a>
+        </div>
     `;
     return item;
 }
