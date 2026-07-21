@@ -4,21 +4,25 @@
 > One Hot Mess is a high-octane classic rock cover band based in Northern Virginia, known for incredible vocal harmonies and electrifying live performances. Voted Best of Prince William 2023.
 
 ## What this site is
-The official website for One Hot Mess, a classic rock cover band playing local venues across Northern Virginia. The site includes event listings, an EPK (electronic press kit), band photos, and booking information.
+The official website for One Hot Mess, a classic rock cover band playing local venues across Northern Virginia. The site includes event listings, an EPK (electronic press kit), band photos, videos, and booking information.
 
 ## Key pages
-- **Homepage:** https://www.onehotmess.band/ — band overview, upcoming events, hero video
+- **Homepage:** https://www.onehotmess.band/ — band overview, upcoming events, hero video, gallery
 - **EPK:** https://www.onehotmess.band/epk.html — electronic press kit with photos, video, song list, stage plot
 - **Events:** https://www.onehotmess.band/ — upcoming shows listed on homepage via events.json
 
 ## Band info
-- **Genre:** Classic rock covers
+- **Genre:** Classic rock, rock, cover band
 - **Location:** Northern Virginia / Prince William area
-- **Awards:** Voted Best of Prince William 2023
-- **Highlights:** Incredible vocal harmonies, electrifying live performances
+- **Awards:** Voted Best of Prince William 2023 — INSIDENOVA.com
+- **Highlights:** Incredible vocal harmonies, electrifying live performances, acoustic-centric arrangements
+- **Venues:** The Farm Brewery at Broad Run, Old Bust Head Brewing Company, The Winery At Sunshine Ridge Farm, and more
 - **Booking:** Available for local venues, private events, and parties
 
 ## Contact
+- **Booking email:** jonsgrayson@gmail.com
+- **Facebook:** https://www.facebook.com/profile.php?id=100062739473361
+- **YouTube:** https://www.youtube.com/@onehotmess
 - Website: https://www.onehotmess.band
 - EPK: https://www.onehotmess.band/epk.html
 
