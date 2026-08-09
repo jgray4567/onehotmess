@@ -197,73 +197,151 @@
         <h2 class="epk-section-title" id="videos-title">Watch One Hot Mess Live</h2>
         <div class="epk-divider"></div>
 
-        <!-- Featured Video -->
-        <div class="epk-video-featured" id="epk-vid-featured" data-video="z7w3RSIjYN0" role="button" tabindex="0" aria-label="Watch One Hot Mess live performance video">
-            <img src="https://img.youtube.com/vi/z7w3RSIjYN0/hqdefault.jpg" alt="One Hot Mess live performance" id="epk-vid-featured-thumb">
-            <div class="epk-video-featured-overlay">
-                <div class="epk-play-btn" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-                <span style="font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.2em;color:rgba(255,255,255,0.9);text-transform:uppercase;">Watch Now</span>
-            </div>
-        </div>
-
-        <!-- Thumbnail Strip -->
-        <div class="epk-video-grid" id="epk-vid-grid" role="list" aria-label="Video thumbnails">
-            <div class="epk-vid-thumb active" data-video="z7w3RSIjYN0" role="listitem" tabindex="0" aria-label="Video 2">
-                <img src="https://img.youtube.com/vi/z7w3RSIjYN0/mqdefault.jpg" alt="One Hot Mess video 1" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="MkaX3Vx2LHg" role="listitem" tabindex="0" aria-label="Video 2">
-                <img src="https://img.youtube.com/vi/MkaX3Vx2LHg/mqdefault.jpg" alt="One Hot Mess video 2" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="r_wuEILTV3M" role="listitem" tabindex="0" aria-label="Video 3">
-                <img src="https://img.youtube.com/vi/r_wuEILTV3M/mqdefault.jpg" alt="One Hot Mess video 3" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="WOXf2M0SlSY" role="listitem" tabindex="0" aria-label="Video 4">
-                <img src="https://img.youtube.com/vi/WOXf2M0SlSY/mqdefault.jpg" alt="One Hot Mess video 4" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="sii5wwoiU3A" role="listitem" tabindex="0" aria-label="Video 4">
-                <img src="https://img.youtube.com/vi/sii5wwoiU3A/mqdefault.jpg" alt="One Hot Mess video 3" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="gNgLSM8pRj0" role="listitem" tabindex="0" aria-label="Video 5">
-                <img src="https://img.youtube.com/vi/gNgLSM8pRj0/mqdefault.jpg" alt="One Hot Mess video 4" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="7DgJ0BwqM6c" role="listitem" tabindex="0" aria-label="Video 6">
-                <img src="https://img.youtube.com/vi/7DgJ0BwqM6c/mqdefault.jpg" alt="One Hot Mess video 5" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="apmv7S8dgWI" role="listitem" tabindex="0" aria-label="Video 8">
-                <img src="https://img.youtube.com/vi/apmv7S8dgWI/mqdefault.jpg" alt="One Hot Mess video 7" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
-            <div class="epk-vid-thumb" data-video="dRgf963YpyU" role="listitem" tabindex="0" aria-label="Video 9">
-                <img src="https://img.youtube.com/vi/dRgf963YpyU/mqdefault.jpg" alt="One Hot Mess video 8" loading="lazy">
-                <div class="epk-vid-thumb-overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-                </div>
-            </div>
+        <div class="vid-mosaic" id="vid-mosaic">
+            <button class="vid-card vid-card--feature" type="button"
+                    data-video="z7w3RSIjYN0" data-title="Never Been Any Reason" data-sweep="left"
+                    style="--reveal-delay:0ms"
+                    aria-label="Play video: One Hot Mess — Never Been Any Reason">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/z7w3RSIjYN0/maxresdefault.jpg"
+                         data-id="z7w3RSIjYN0" alt="One Hot Mess — Never Been Any Reason"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Live 2025</span>
+                    <span class="vid-title">Never Been Any Reason</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="MkaX3Vx2LHg" data-title="Free / Into the Mystic" data-sweep="right"
+                    style="--reveal-delay:70ms"
+                    aria-label="Play video: One Hot Mess — Free / Into the Mystic">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/MkaX3Vx2LHg/maxresdefault.jpg"
+                         data-id="MkaX3Vx2LHg" alt="One Hot Mess — Free / Into the Mystic"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Medley</span>
+                    <span class="vid-title">Free / Into the Mystic</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="r_wuEILTV3M" data-title="Copperhead Road" data-sweep="right"
+                    style="--reveal-delay:140ms"
+                    aria-label="Play video: One Hot Mess — Copperhead Road">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/r_wuEILTV3M/maxresdefault.jpg"
+                         data-id="r_wuEILTV3M" alt="One Hot Mess — Copperhead Road"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Live</span>
+                    <span class="vid-title">Copperhead Road</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="sii5wwoiU3A" data-title="Silver Wings" data-sweep="up"
+                    style="--reveal-delay:210ms"
+                    aria-label="Play video: One Hot Mess — Silver Wings">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/sii5wwoiU3A/maxresdefault.jpg"
+                         data-id="sii5wwoiU3A" alt="One Hot Mess — Silver Wings"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Cover</span>
+                    <span class="vid-title">Silver Wings</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="gNgLSM8pRj0" data-title="We Just Disagree" data-sweep="up"
+                    style="--reveal-delay:280ms"
+                    aria-label="Play video: One Hot Mess — We Just Disagree">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/gNgLSM8pRj0/maxresdefault.jpg"
+                         data-id="gNgLSM8pRj0" alt="One Hot Mess — We Just Disagree"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Cover</span>
+                    <span class="vid-title">We Just Disagree</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="apmv7S8dgWI" data-title="Creep" data-sweep="left"
+                    style="--reveal-delay:350ms"
+                    aria-label="Play video: One Hot Mess — Creep">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/apmv7S8dgWI/maxresdefault.jpg"
+                         data-id="apmv7S8dgWI" alt="One Hot Mess — Creep"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Cover</span>
+                    <span class="vid-title">Creep</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="WOXf2M0SlSY" data-title="One Hot Mess" data-sweep="down"
+                    style="--reveal-delay:420ms"
+                    aria-label="Play video: One Hot Mess — One Hot Mess">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/WOXf2M0SlSY/maxresdefault.jpg"
+                         data-id="WOXf2M0SlSY" alt="One Hot Mess — One Hot Mess"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Live 2021</span>
+                    <span class="vid-title">One Hot Mess</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="7DgJ0BwqM6c" data-title="Acoustic Trio" data-sweep="right"
+                    style="--reveal-delay:490ms"
+                    aria-label="Play video: One Hot Mess — Acoustic Trio">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/7DgJ0BwqM6c/maxresdefault.jpg"
+                         data-id="7DgJ0BwqM6c" alt="One Hot Mess — Acoustic Trio"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Promo</span>
+                    <span class="vid-title">Acoustic Trio</span>
+                </span>
+            </button>
+            <button class="vid-card" type="button"
+                    data-video="dRgf963YpyU" data-title="Acoustic Band" data-sweep="left"
+                    style="--reveal-delay:560ms"
+                    aria-label="Play video: One Hot Mess — Acoustic Band">
+                <span class="vid-card-media">
+                    <img src="https://i.ytimg.com/vi/dRgf963YpyU/maxresdefault.jpg"
+                         data-id="dRgf963YpyU" alt="One Hot Mess — Acoustic Band"
+                         width="1280" height="720" loading="lazy" decoding="async">
+                </span>
+                <span class="vid-card-shade" aria-hidden="true"></span>
+                <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg></span>
+                <span class="vid-meta">
+                    <span class="vid-kind">Live Set</span>
+                    <span class="vid-title">Acoustic Band</span>
+                </span>
+            </button>
         </div>
     </div>
 </section>
@@ -360,14 +438,23 @@
 </div>
 
 <!-- VIDEO LIGHTBOX -->
-<div class="epk-lightbox" id="epk-lightbox" role="dialog" aria-modal="true" aria-label="Video player">
-    <div class="epk-lightbox-inner">
-        <button class="epk-lightbox-close" id="epk-lb-close" aria-label="Close video">&times;</button>
-        <iframe id="epk-lb-iframe" src="about:blank" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
-            title="One Hot Mess video">
-        </iframe>
+<div class="vlb" id="vlb" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="vlb-close" id="vlb-close" type="button" aria-label="Close video">&times;</button>
+    <div class="vlb-stage">
+        <div class="vlb-frame">
+            <iframe id="vlb-iframe" src="about:blank"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+                title="One Hot Mess video"></iframe>
+        </div>
+        <div class="vlb-bar">
+            <button class="vlb-nav" id="vlb-prev" type="button" aria-label="Previous video">&#8249;</button>
+            <div class="vlb-caption">
+                <span class="vlb-title" id="vlb-title"></span>
+                <span class="vlb-count" id="vlb-count"></span>
+            </div>
+            <button class="vlb-nav" id="vlb-next" type="button" aria-label="Next video">&#8250;</button>
+        </div>
     </div>
 </div>
 
@@ -613,66 +700,115 @@
 </footer>
 
 <script>
-(function() {
-    // ---- Video thumbnail switching ----
-    const featured = document.getElementById('epk-vid-featured');
-    const featuredThumb = document.getElementById('epk-vid-featured-thumb');
-    const thumbs = document.querySelectorAll('.epk-vid-thumb');
-    const lightbox = document.getElementById('epk-lightbox');
-    const lbIframe = document.getElementById('epk-lb-iframe');
-    const lbClose = document.getElementById('epk-lb-close');
+/* ---- VIDEOS: mosaic wall + max-size lightbox (mirrors the homepage) ---- */
+(function () {
+    var mosaic = document.getElementById('vid-mosaic');
+    var lb     = document.getElementById('vlb');
+    if (!mosaic || !lb) return;
 
-    let currentVideo = 'WOXf2M0SlSY';
+    var cards   = Array.prototype.slice.call(mosaic.querySelectorAll('.vid-card'));
+    var iframe  = document.getElementById('vlb-iframe');
+    var elClose = document.getElementById('vlb-close');
+    var elPrev  = document.getElementById('vlb-prev');
+    var elNext  = document.getElementById('vlb-next');
+    var elTitle = document.getElementById('vlb-title');
+    var elCount = document.getElementById('vlb-count');
 
-    thumbs.forEach(function(thumb) {
-        thumb.addEventListener('click', function() {
-            const vid = this.dataset.video;
-            currentVideo = vid;
-            featuredThumb.src = 'https://img.youtube.com/vi/' + vid + '/hqdefault.jpg';
-            featured.dataset.video = vid;
-            thumbs.forEach(function(t) { t.classList.remove('active'); });
-            this.classList.add('active');
+    /* Thumbnails: maxres, stepping down when it doesn't exist */
+    function downgrade(img) {
+        var id = img.getAttribute('data-id');
+        if (!id || img.getAttribute('data-fallback')) return;
+        img.setAttribute('data-fallback', '1');
+        img.closest('.vid-card').classList.add('is-boxed');
+        img.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+    }
+
+    mosaic.querySelectorAll('.vid-card-media img').forEach(function (img) {
+        img.addEventListener('error', function () { downgrade(img); });
+        img.addEventListener('load', function () {
+            if (img.naturalWidth > 0 && img.naturalWidth <= 120) downgrade(img);
         });
-
-        thumb.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.click();
-            }
-        });
+        if (img.complete && img.naturalWidth === 0) downgrade(img);
     });
 
-    // Open lightbox
-    featured.addEventListener('click', function() {
-        const vid = this.dataset.video;
-        lbIframe.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&rel=0';
-        lightbox.classList.add('active');
+    /* Lightbox */
+    var index = 0, lastFocused = null, scrollLock = 0;
+
+    function render() {
+        var card = cards[index];
+        iframe.src = 'https://www.youtube.com/embed/' + card.dataset.video +
+                     '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        elTitle.textContent = card.dataset.title || 'One Hot Mess';
+        elCount.textContent = (index + 1) + ' / ' + cards.length;
+    }
+
+    function open(i) {
+        index = i;
+        lastFocused = document.activeElement;
+        scrollLock = window.scrollY;
+        render();
+        lb.classList.add('open');
         document.body.style.overflow = 'hidden';
-        lbClose.focus();
+        elClose.focus({ preventScroll: true });
+    }
+
+    function close() {
+        lb.classList.remove('open');
+        iframe.src = 'about:blank';
+        document.body.style.overflow = '';
+        window.scrollTo({ top: scrollLock });
+        if (lastFocused && lastFocused.focus) lastFocused.focus({ preventScroll: true });
+    }
+
+    function step(delta) {
+        index = (index + delta + cards.length) % cards.length;
+        render();
+    }
+
+    cards.forEach(function (card, i) {
+        card.addEventListener('click', function () { open(i); });
     });
 
-    featured.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
+    elClose.addEventListener('click', close);
+    elPrev.addEventListener('click', function () { step(-1); });
+    elNext.addEventListener('click', function () { step(1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  step(-1);
+        if (e.key === 'ArrowRight') step(1);
+        if (e.key === 'Tab') {
+            var f = [elClose, elPrev, elNext];
+            var i = f.indexOf(document.activeElement);
             e.preventDefault();
-            this.click();
+            f[e.shiftKey ? (i - 1 + f.length) % f.length : (i + 1) % f.length].focus();
         }
     });
 
-    // Close lightbox
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        lbIframe.src = 'about:blank';
-        document.body.style.overflow = '';
-        featured.focus();
-    }
+    var touchX = null;
+    lb.addEventListener('touchstart', function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
 
-    lbClose.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', function(e) {
-        if (e.target === lightbox) closeLightbox();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
-    });
+    /* Directional sweep-in reveal */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        cards.forEach(function (c) { c.classList.add('is-in'); });
+    } else {
+        var io = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                obs.unobserve(entry.target);
+            });
+        }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+        cards.forEach(function (c) { io.observe(c); });
+    }
 })();
 
 // ---- EPK HAMBURGER ----

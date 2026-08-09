@@ -202,53 +202,276 @@ dom.mobileLinks.forEach(link => {
 });
 
 /* =============================================
-   VIDEO GALLERY — EPK-style featured + grid + lightbox
+   SHARED — directional sweep-in reveal
+   Any element with [data-sweep] slides in from its
+   assigned edge the first time it enters the viewport.
    ============================================= */
-(function() {
-    const featured    = document.getElementById('main-vid-featured');
-    const featuredThumb = document.getElementById('main-vid-featured-thumb');
-    const thumbs      = document.querySelectorAll('#main-vid-grid .epk-vid-thumb');
-    const lightbox    = document.getElementById('main-lightbox');
-    const lbIframe    = document.getElementById('main-lb-iframe');
-    const lbClose     = document.getElementById('main-lb-close');
-    if (!featured || !lightbox) return;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let currentVideo  = featured.dataset.video;
+const sweepIn = (elements) => {
+    const items = [...elements];
+    if (!items.length) return;
 
-    // Thumbnail click → update featured + open lightbox
-    thumbs.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            currentVideo = thumb.dataset.video;
-            featuredThumb.src = `https://img.youtube.com/vi/${currentVideo}/hqdefault.jpg`;
-            featured.dataset.video = currentVideo;
-            thumbs.forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-            openLB();
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-in'));
+        return;
+    }
+
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            el.classList.add('is-in');
+            obs.unobserve(el);
+            // Drop the stagger delay once revealed, so later state changes
+            // (dimming, hover) respond instantly.
+            const delay = parseInt(el.style.getPropertyValue('--reveal-delay')) || 0;
+            setTimeout(() => el.style.setProperty('--reveal-delay', '0ms'), delay + 1000);
         });
-        thumb.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); thumb.click(); }
+    }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+
+    items.forEach(el => io.observe(el));
+};
+
+
+/* =============================================
+   VIDEOS — Mosaic wall + max-size lightbox
+   ============================================= */
+(function () {
+    const mosaic = document.getElementById('vid-mosaic');
+    const lb     = document.getElementById('vlb');
+    if (!mosaic || !lb) return;
+
+    const cards   = [...mosaic.querySelectorAll('.vid-card')];
+    const iframe  = document.getElementById('vlb-iframe');
+    const elClose = document.getElementById('vlb-close');
+    const elPrev  = document.getElementById('vlb-prev');
+    const elNext  = document.getElementById('vlb-next');
+    const elTitle = document.getElementById('vlb-title');
+    const elCount = document.getElementById('vlb-count');
+
+    /* ---- Thumbnails: maxres, stepping down when it doesn't exist ---- */
+    const downgrade = (img) => {
+        const id = img.dataset.id;
+        if (!id || img.dataset.fallback) return;
+        img.dataset.fallback = '1';
+        img.closest('.vid-card').classList.add('is-boxed');   // crops hqdefault's letterbox bars
+        img.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+    };
+
+    mosaic.querySelectorAll('.vid-card-media img').forEach(img => {
+        img.addEventListener('error', () => downgrade(img));
+        // maxresdefault sometimes resolves to YouTube's 120px grey placeholder
+        img.addEventListener('load', () => {
+            if (img.naturalWidth > 0 && img.naturalWidth <= 120) downgrade(img);
         });
+        if (img.complete && img.naturalWidth === 0) downgrade(img);
     });
 
-    // Featured click → open lightbox
-    const openLB = () => {
-        lbIframe.src = `https://www.youtube.com/embed/${currentVideo}?autoplay=1&rel=0`;
-        lightbox.classList.add('active');
+    /* ---- Lightbox ---- */
+    let index = 0;
+    let lastFocused = null;
+    let scrollLock = 0;
+
+    const render = () => {
+        const card = cards[index];
+        iframe.src = 'https://www.youtube.com/embed/' + card.dataset.video +
+                     '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        elTitle.textContent = card.dataset.title || 'One Hot Mess';
+        elCount.textContent = (index + 1) + ' / ' + cards.length;
+    };
+
+    const open = (i) => {
+        index = i;
+        lastFocused = document.activeElement;
+        scrollLock = window.scrollY;
+        render();
+        lb.classList.add('open');
         document.body.style.overflow = 'hidden';
-    };
-    const closeLB = () => {
-        lightbox.classList.remove('active');
-        lbIframe.src = 'about:blank';
-        document.body.style.overflow = '';
+        elClose.focus({ preventScroll: true });
+        if (typeof gtag === 'function') {
+            gtag('event', 'video_open', { video_id: cards[index].dataset.video });
+        }
     };
 
-    featured.addEventListener('click', openLB);
-    featured.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(); }});
-    lbClose.addEventListener('click', closeLB);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLB();
+    const close = () => {
+        lb.classList.remove('open');
+        iframe.src = 'about:blank';
+        document.body.style.overflow = '';
+        window.scrollTo({ top: scrollLock });
+        if (lastFocused && lastFocused.focus) lastFocused.focus({ preventScroll: true });
+    };
+
+    const step = (delta) => {
+        index = (index + delta + cards.length) % cards.length;
+        render();
+    };
+
+    cards.forEach((card, i) => card.addEventListener('click', () => open(i)));
+
+    elClose.addEventListener('click', close);
+    elPrev.addEventListener('click', () => step(-1));
+    elNext.addEventListener('click', () => step(1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', (e) => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     { close(); }
+        if (e.key === 'ArrowLeft')  { step(-1); }
+        if (e.key === 'ArrowRight') { step(1); }
+        if (e.key === 'Tab') {
+            // keep focus inside the dialog
+            const focusables = [elClose, elPrev, elNext];
+            const i = focusables.indexOf(document.activeElement);
+            e.preventDefault();
+            const next = e.shiftKey ? (i - 1 + focusables.length) % focusables.length
+                                    : (i + 1) % focusables.length;
+            focusables[next].focus();
+        }
     });
+
+    // Swipe across the backdrop / caption bar to change videos on touch devices
+    let touchX = null;
+    lb.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    sweepIn(cards);
+})();
+
+
+/* =============================================
+   THE MESS — Roster wall with expanding bio panel
+   ============================================= */
+(function () {
+    const grid = document.getElementById('roster-grid');
+    if (!grid) return;
+
+    const tiles = [...grid.querySelectorAll('.member')];
+    const bios  = {};
+    document.querySelectorAll('.member-bio-src').forEach(node => {
+        bios[node.dataset.member] = node;
+    });
+
+    // Shared panel, moved through the grid so it always opens under the right row
+    const panel = document.createElement('div');
+    panel.className = 'member-panel';
+    panel.id = 'member-panel';
+    panel.setAttribute('role', 'region');
+    grid.appendChild(panel);
+
+    let openTile = null;
+
+    const rowSiblings = (tile) => {
+        const top = tile.offsetTop;
+        return tiles.filter(t => Math.abs(t.offsetTop - top) < 6);
+    };
+
+    const collapse = (instant) => {
+        if (!openTile) return;
+        const tile = openTile;
+        openTile = null;
+        tile.classList.remove('is-open');
+        tile.setAttribute('aria-expanded', 'false');
+        tile.removeAttribute('aria-controls');
+        grid.classList.remove('has-open');
+        panel.classList.remove('is-open');
+        panel.style.height = panel.scrollHeight + 'px';
+        void panel.offsetHeight;
+        panel.style.height = instant ? '0px' : '0px';
+    };
+
+    const expand = (tile) => {
+        const key  = tile.dataset.member;
+        const src  = bios[key];
+        if (!src) return;
+
+        // Move the panel to the end of the clicked tile's row before measuring
+        const row  = rowSiblings(tile);
+        const last = row[row.length - 1];
+        if (last.nextSibling !== panel) {
+            panel.style.height = '0px';
+            grid.insertBefore(panel, last.nextSibling);
+        }
+
+        const img = tile.querySelector('img');
+        panel.innerHTML =
+            '<div class="member-panel-inner">' +
+                '<div class="member-panel-photo">' +
+                    '<img src="' + img.getAttribute('src') + '" alt="' + img.getAttribute('alt') + '" ' +
+                         'width="800" height="1000" loading="lazy" decoding="async">' +
+                '</div>' +
+                '<div class="member-panel-body">' +
+                    '<h4 class="member-panel-name">' + src.dataset.fullname + '</h4>' +
+                    '<p class="member-panel-role">' + src.dataset.role + '</p>' +
+                    src.innerHTML +
+                    '<button class="member-panel-close" type="button">Close</button>' +
+                '</div>' +
+            '</div>';
+
+        panel.querySelector('.member-panel-close').addEventListener('click', () => {
+            collapse();
+            tile.focus({ preventScroll: true });
+        });
+
+        tile.classList.add('is-open');
+        tile.setAttribute('aria-expanded', 'true');
+        tile.setAttribute('aria-controls', 'member-panel');
+        grid.classList.add('has-open');
+        panel.classList.add('is-open');
+
+        // Animate to the measured height, then release to auto
+        const target = panel.firstElementChild.offsetHeight;
+        panel.style.height = target + 'px';
+        openTile = tile;
+
+        window.setTimeout(() => {
+            if (openTile === tile) panel.style.height = 'auto';
+        }, 520);
+    };
+
+    tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+            const wasOpen = tile === openTile;
+            collapse();
+            if (wasOpen) return;
+            expand(tile);
+            window.setTimeout(() => {
+                const navH = parseInt(getComputedStyle(document.documentElement)
+                                .getPropertyValue('--nav-height')) || 60;
+                const rect = tile.getBoundingClientRect();
+                if (rect.top < navH + 12) {
+                    window.scrollTo({ top: window.scrollY + rect.top - navH - 20, behavior: 'smooth' });
+                }
+            }, 60);
+        });
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && openTile) {
+            const t = openTile;
+            collapse();
+            t.focus({ preventScroll: true });
+        }
+    });
+
+    // Column count changes on resize — reflow the open panel to the correct row
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        if (!openTile) return;
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const t = openTile;
+            collapse();
+            expand(t);
+        }, 180);
+    });
+
+    sweepIn(tiles);
 })();
 
 
@@ -510,7 +733,7 @@ const updateActiveNav = () => {
    SCROLL REVEAL
    ============================================= */
 const setupReveal = () => {
-    document.querySelectorAll('.section-title, .mess-text, .mess-image, .video-card, .show-card, .gallery-item').forEach(el => {
+    document.querySelectorAll('.section-title, .mess-text, .mess-image, .show-card, .gallery-item').forEach(el => {
         el.classList.add('reveal');
     });
 
